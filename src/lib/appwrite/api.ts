@@ -371,7 +371,7 @@ export async function getInfinitePosts({ pageParam }: { pageParam: number }) {
     const posts = await databases.listDocuments(
       appwriteConfig.databaseId,
       appwriteConfig.postCollectionId,
-      queries
+      [Query.orderDesc("$updatedAt"), Query.limit(9)]
     );
 
     if (!posts) throw Error;
@@ -418,6 +418,18 @@ export async function getAllUsers(){
         appwriteConfig.userCollectionId
       )
       return allUsers
+  }catch (error){
+    console.log(error)
+  }
+}
+
+export async function getAllPosts(){
+  try{
+      const allPosts = databases.listDocuments(
+        appwriteConfig.databaseId,
+        appwriteConfig.postCollectionId
+      )
+      return allPosts
   }catch (error){
     console.log(error)
   }
