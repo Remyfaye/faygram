@@ -6,7 +6,6 @@ import {Form,FormControl,FormField,FormItem,FormLabel,FormMessage,
 } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
 import { Textarea } from "../ui/textarea"
-import FileUploader from "../shared/fileUploader"
 import { Button } from "../ui/button"
 import { PostValidation } from "@/lib/validation"
 import { Models } from "appwrite"
@@ -14,7 +13,8 @@ import { useUserContext } from "@/context/AuthContext"
 import { toast } from "../ui/use-toast"
 import { useNavigate } from "react-router-dom"
 import { useCreatePost, useUpdatePost } from "@/lib/react-query/queriesAndMutations"
-import { updatePost } from "@/lib/appwrite/api"
+// import { updatePost } from "@/lib/appwrite/api"
+import FileUploader from "../shared/FileUploader"
 
 type PostFormProps = {
     post?: Models.Document,

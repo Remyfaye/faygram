@@ -3,7 +3,6 @@ import { useParams, Link, useNavigate } from "react-router-dom";
 
 import {
   useDeletePost,
-  useDeleteSavedPost,
   useGetPostById,
 } from "@/lib/react-query/queriesAndMutations";
 // import { multiFormatDateString } from "@/lib/utils";
@@ -12,7 +11,6 @@ import { Button } from "@/components/ui/button";
 import { formatDateString } from "@/lib/utils";
 import { Loader } from "lucide-react";
 import PostStats from "@/components/shared/PostStats";
-import { deletePost } from "@/lib/appwrite/api";
 
 const PostDetails = () => {
   const navigate = useNavigate();

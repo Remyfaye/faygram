@@ -3,7 +3,7 @@ import { FileWithPath, useDropzone } from "react-dropzone"
 
 type FileUploaderProps = {
     fieldChange: (FILES: File[]) => void
-    imageUrl: string
+    mediaUrl: string
 }
 
 

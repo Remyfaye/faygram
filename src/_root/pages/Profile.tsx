@@ -13,7 +13,7 @@ const Profile = () => {
 
   const userId = user?.id
 
-  const {data:userPosts, ispending} = useGetUserPostById(userId)
+  const {data:userPosts} = useGetUserPostById(userId)
   const {data:savedPosts} = useGetSavedPost()
   console.log(savedPosts)
 
@@ -63,7 +63,7 @@ const Profile = () => {
         </div>
 
         <div>
-          {showPost ? (
+          {showPost && (
             <div className="flex flex-wrap gap-5 py-5">
               {userPosts?.documents?.map( (post) => (
                 <div className="max-w-2xl h-[200px]">
@@ -73,13 +73,14 @@ const Profile = () => {
                 </div>
               ))}
             </div>
-          ) : (
+          ) }
+          {showSaved && (
             <div>
-              {savedPosts?.documnets?.map((saved) => (
+              {savedPosts?.documents?.map((saved) => (
                 <div className="max-w-2xl h-[200px]">
-                <img src={saved?.imageUrl} height={100}
-                className="w-full object-contain  mb-5 rounded-xl grid-post_link"
-                />
+                  <img src={saved?.imageUrl} height={100}
+                  className="w-full object-contain  mb-5 rounded-xl grid-post_link"
+                  />
               </div>
               ))}
             </div>

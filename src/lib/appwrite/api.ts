@@ -205,7 +205,7 @@ export async function likePost(postId: string, likesArray:string[]){
       }
     )
 
-    if(!updatePost) throw error
+    if(!updatePost) throw Error
     return updatePost
 
   }catch (error){
@@ -226,7 +226,7 @@ export async function savePost(postId:string, userId:string){
       }
     )
 
-    if(!savePost) throw error
+    if(!savePost) throw Error
     return savePost
 
   }catch (error) {
@@ -243,7 +243,7 @@ export async function deleteSavedPost(savedRecordId:string){
       savedRecordId
     )
 
-    if(!statusCode) throw error
+    if(!statusCode) throw Error
     return{ status: 'ok'}
 
   } catch(error){
@@ -265,31 +265,23 @@ export async function getPostById(postId: string){
   }
 }
 
-export async function getUserPostById(userId?: string){
-  // const userPostId = user
-  try{
-    // const post = await databases.listDocuments(
-    //   appwriteConfig.databaseId,
-    //   appwriteConfig.postCollectionId,
-      
-    // )
+export async function getUserPostById(userId?: string) {
+  if (!userId) return;
 
-    // const postId = post?.documents[0]?.creator.$id
-
-    const userPosts = await databases.listDocuments(
+  try {
+    const post = await databases.listDocuments(
       appwriteConfig.databaseId,
       appwriteConfig.postCollectionId,
-      [Query.equal('creator', userId), Query.orderDesc('$createdAt')]
-    )
+      [Query.equal("creator", userId), Query.orderDesc("$createdAt")]
+    );
 
-    return userPosts
+    if (!post) throw Error;
 
-
-  }catch (error) {
-    console.log(error)
+    return post;
+  } catch (error) {
+    console.log(error);
   }
 }
-
 
 export async function updatePost(post:IUpdatePost){
   const hasFileToUpload = post.file.length > 0
