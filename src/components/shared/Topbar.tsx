@@ -46,11 +46,7 @@ const Topbar = () => {
             </Link> */}
 
             
-        <Link to={`/profile/${user.id}`} className="flex">
-          <img src={user.imageUrl || '/assets/icons/profile-placeholder.svg'}
-          alt="prf"
-          className="h-10 w-10 rounded-full"/>
-        </Link>
+      
         </div>
       </div>
     </section >

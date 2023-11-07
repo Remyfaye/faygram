@@ -50,10 +50,12 @@ const SignUpForm = () => {
       })
   
       if(!session) {
-        return toast({title:'sign in failed. please try again'})
+        toast({title:'welcome'})
+        return navigate('/')
       }
   
-      const isLoggedIn = await checkAuthUser()
+      // const isLoggedIn = await checkAuthUser()
+      const isLoggedIn = true
   
       if(isLoggedIn){
         form.reset()

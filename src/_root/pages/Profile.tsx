@@ -1,21 +1,35 @@
-import { useUserContext } from "@/context/AuthContext"
-import { useGetSavedPost, useGetUserPostById } from "@/lib/react-query/queriesAndMutations"
+// import { useUserContext } from "@/context/AuthContext"
+import { allUsers, homeFeed } from "@/constants"
+
 import { useState } from "react"
+import { useParams } from "react-router-dom"
 // import { Link } from "react-router-dom"
 
+function shuffleArray<T>(array: T[]): T[] {
+  const shuffledArray = [...array]; // Create a copy of the original array
+
+  for (let i = shuffledArray.length - 1; i > 0; i--) {
+    // Generate a random index between 0 and i (inclusive)
+    const randomIndex = Math.floor(Math.random() * (i + 1));
+
+    // Swap elements between randomIndex and i
+    [shuffledArray[i], shuffledArray[randomIndex]] = [shuffledArray[randomIndex], shuffledArray[i]];
+  }
+
+  return shuffledArray;
+}
 
 const Profile = () => {
 
+  const {id} = useParams()
+ 
   const [showPost, setShowPost] = useState(true)
   const [showSaved, setShowSaved] = useState(false)
-  const {user} = useUserContext()
+  // const {user} = useUserContext()
 
+  const user = allUsers.find((user) => user.id === id)
 
-  const userId = user?.id
-
-  const {data:userPosts} = useGetUserPostById(userId)
-  const {data:savedPosts} = useGetSavedPost()
-  console.log(savedPosts)
+  const shuffledArray = shuffleArray(homeFeed);
 
 
   // const displaySaved = () => {
@@ -29,9 +43,9 @@ const Profile = () => {
       <div className="flex items-center gap-3 mb-10">
 
         <img 
-            className="rounded-full w-12 lg:h-12"
+            className="rounded-full w-8 h-8 object-cover lg:h-12"
             alt='creator'
-            src={user?.imageUrl || '/assets/icons/profile-placeholder.svg'}/>
+            src={user?.creatorImg || '/assets/icons/profile-placeholder.svg'}/>
 
 
         <div className="flex flex-col">
@@ -64,24 +78,26 @@ const Profile = () => {
 
         <div>
           {showPost && (
-            <div className="flex flex-wrap gap-5 py-5">
-              {userPosts?.documents?.map( (post) => (
-                <div className="max-w-2xl h-[200px]">
-                  <img src={post?.imageUrl} height={100}
-                  className="w-full object-contain  mb-5 rounded-xl grid-post_link"
+            <div className="flex justify-center flex-wrap gap-5 py-5 ">
+              {homeFeed?.map( (post) => (
+                <div className="max-w-2xl ">
+                  <img src={post?.imageUrl} height={160} width={160}
+                  className=" object-contain 
+                   rounded-xl "
                   />
                 </div>
               ))}
             </div>
           ) }
           {showSaved && (
-            <div>
-              {savedPosts?.documents?.map((saved) => (
-                <div className="max-w-2xl h-[200px]">
-                  <img src={saved?.imageUrl} height={100}
-                  className="w-full object-contain  mb-5 rounded-xl grid-post_link"
+            <div className="flex justify-center flex-wrap gap-5 py-5 ">
+              {shuffledArray?.map( (post) => (
+                <div className="max-w-2xl ">
+                  <img src={post?.imageUrl} height={160} width={160}
+                  className=" object-contain 
+                   rounded-xl "
                   />
-              </div>
+                </div>
               ))}
             </div>
           )}

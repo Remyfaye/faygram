@@ -1,5 +1,6 @@
 import Loader from "@/components/shared/Loader"
 import PostCard from "@/components/shared/PostCard"
+import { homeFeed } from "@/constants"
 import { useGetResentPost } from "@/lib/react-query/queriesAndMutations"
 import { Models } from "appwrite"
 
@@ -15,11 +16,16 @@ const Home = () => {
 
           <h2 className="h3-bold capitalize w-full">home feed</h2>
 
-          {isPostLoading && !posts ? (
+          {isPostLoading && !homeFeed ? (
             <Loader/>
           ) : (
             <ul className="flex flex-col ">
-              {posts?.documents.map((post: Models.Document) => (
+              {/* {posts?.documents.map((post: Models.Document) => (
+                <PostCard post={post} />
+                // <>ll</>
+              ))} */}
+
+              {homeFeed.map(post => (
                 <PostCard post={post} />
                 // <>ll</>
               ))}

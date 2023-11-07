@@ -2,15 +2,16 @@ import { useParams, Link, useNavigate } from "react-router-dom";
 
 
 import {
-  useDeletePost,
-  useGetPostById,
+  // useDeletePost,
+  useGetPostById
 } from "@/lib/react-query/queriesAndMutations";
 // import { multiFormatDateString } from "@/lib/utils";
 import { useUserContext } from "@/context/AuthContext";
 import { Button } from "@/components/ui/button";
-import { formatDateString } from "@/lib/utils";
+// import { formatDateString } from "@/lib/utils";
 import { Loader } from "lucide-react";
-import PostStats from "@/components/shared/PostStats";
+// import PostStats from "@/components/shared/PostStats";
+import { homeFeed } from "@/constants";
 
 const PostDetails = () => {
   const navigate = useNavigate();
@@ -18,20 +19,24 @@ const PostDetails = () => {
   const { user } = useUserContext();
   const safeString = id || 'default value';
 
-  const { data: post, isLoading } = useGetPostById(safeString);
+  const { data: post } = useGetPostById(safeString);
   // const { data: userPosts, isLoading: isUserPostLoading } = useGetUserPost(
   //   post?.creator.$id
   // );
-  const { mutate: deletePost } = useDeletePost();
+  // const { mutate: deletePost } = useDeletePost();
+
+   
+  const targetObject = homeFeed.find((obj) => obj.id === safeString);
+  console.log(targetObject)
 
   // const relatedPosts = userPosts?.documents.filter(
   //   (userPosts) => userPost.$id !== id
   // );
 
-  const handleDeletePost = () => {
-    deletePost({ postId: id, imageId: post?.imageId });
-    navigate(-1);
-  };
+  // const handleDeletePost = () => {
+  //   deletePost({ postId: id, imageId: post?.imageId });
+  //   navigate(-1);
+  // };
 
   return (
     <div className="post_details-container">
@@ -50,12 +55,12 @@ const PostDetails = () => {
         </Button>
       </div>
 
-      {isLoading || !post ? (
+      {!targetObject ? (
         <Loader />
       ) : (
         <div className="post_details-card">
           <img
-            src={post?.imageUrl}
+            src={targetObject?.imageUrl}
             alt="creator"
             className="post_details-img"
           />
@@ -63,11 +68,11 @@ const PostDetails = () => {
           <div className="post_details-info">
             <div className="flex-between w-full">
               <Link
-                to={`/profile/${post?.creator.$id}`}
+                to={`/profile/${id}`}
                 className="flex items-center gap-3">
                 <img
                   src={
-                    post?.creator.imageUrl ||
+                    targetObject?.creatorImg ||
                     "/assets/icons/profile-placeholder.svg"
                   }
                   alt="creator"
@@ -75,15 +80,16 @@ const PostDetails = () => {
                 />
                 <div className="flex gap-1 flex-col">
                   <p className="base-medium lg:body-bold text-light-1">
-                    {post?.creator.name}
+                    {targetObject?.creator}
                   </p>
                   <div className="flex-center gap-2 text-light-3">
                     <p className="subtle-semibold lg:small-regular ">
-                      {formatDateString(post?.$createdAt)}
+                      {/* {formatDateString(post?.$createdAt)} */}
+                      {targetObject.date}
                     </p>
                     •
                     <p className="subtle-semibold lg:small-regular">
-                      {post?.location}
+                      {targetObject?.location}
                     </p>
                   </div>
                 </div>
@@ -101,10 +107,10 @@ const PostDetails = () => {
                   />
                 </Link>
 
-                <Button
+                {/* <Button
                   onClick={handleDeletePost}
                   variant="ghost"
-                  className={`ost_details-delete_btn ${
+                  className={`post_details-delete_btn ${
                     user.id !== post?.creator.$id && "hidden"
                   }`}>
                   <img
@@ -113,7 +119,7 @@ const PostDetails = () => {
                     width={24}
                     height={24}
                   />
-                </Button>
+                </Button> */}
                 
               </div>
             </div>
@@ -121,7 +127,7 @@ const PostDetails = () => {
             <hr className="border w-full border-dark-4/80" />
 
             <div className="flex flex-col flex-1 w-full small-medium lg:base-regular">
-              <p>{post?.caption}</p>
+              <p>{targetObject?.caption}</p>
               <ul className="flex gap-1 mt-2">
                 {post?.tags.map((tag: string, index: string) => (
                   <li
@@ -134,7 +140,7 @@ const PostDetails = () => {
             </div>
 
             <div className="w-full">
-              <PostStats post={post} userId={user.id} />
+              {/* <PostStats targetObject={post} userId={user.id} /> */}
             </div>
           </div>
         </div>

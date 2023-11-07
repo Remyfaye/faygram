@@ -1,11 +1,14 @@
 import { useState } from "react";
 // import { useInView } from "react-intersection-observer";
 
-import useDebounce from "@/hooks/useDebounce";
+// import useDebounce from "@/hooks/useDebounce";
 import Loader from "@/components/shared/Loader";
-import GridPostList from "@/components/shared/GridPostList";
+// import GridPostList from "@/components/shared/GridPostList";
 import { Input } from "@/components/ui/input";
-import { useGetPosts, useSearchPosts } from "@/lib/react-query/queriesAndMutations";
+// import { useGetPosts } from "@/lib/react-query/queriesAndMutations";
+import { homeFeed } from "@/constants";
+// import PostStats from "@/components/shared/PostStats";
+import { Link } from "react-router-dom";
 
 export type SearchResultProps = {
   isSearchFetching: boolean;
@@ -13,25 +16,42 @@ export type SearchResultProps = {
   searchedPosts: any;
 };
 
-const SearchResults = ({ isSearchFetching, searchedPosts }: SearchResultProps) => {
-  if (isSearchFetching) {
-    return <Loader />;
-  } else if (searchedPosts && searchedPosts.documents.length > 0) {
-    return <GridPostList posts={searchedPosts.documents} />;
-  } else {
-    return (
-      <p className="text-light-4 mt-10 text-center w-full">No results found</p>
-    );
+// const SearchResults = ({ isSearchFetching, searchedPosts }: SearchResultProps) => {
+//   if (isSearchFetching) {
+//     return <Loader />;
+//   } else if (searchedPosts && searchedPosts.documents.length > 0) {
+//     return <GridPostList posts={searchedPosts.documents} />;
+//   } else {
+//     return (
+//       <p className="text-light-4 mt-10 text-center w-full">No results found</p>
+//     );
+//   }
+// };
+
+function shuffleArray<T>(array: T[]): T[] {
+  const shuffledArray = [...array]; // Create a copy of the original array
+
+  for (let i = shuffledArray.length - 1; i > 0; i--) {
+    // Generate a random index between 0 and i (inclusive)
+    const randomIndex = Math.floor(Math.random() * (i + 1));
+
+    // Swap elements between randomIndex and i
+    [shuffledArray[i], shuffledArray[randomIndex]] = [shuffledArray[randomIndex], shuffledArray[i]];
   }
-};
+
+  return shuffledArray;
+}
 
 const Explore = () => {
   // const { ref, inView } = useInView();
-  const { data: posts  } = useGetPosts();
+  // const { data: posts  } = useGetPosts();
+
+  const shuffledArray = shuffleArray(homeFeed);
 
   const [searchValue, setSearchValue] = useState("");
-  const debouncedSearch = useDebounce(searchValue, 500);
-  const { data: searchedPosts, isFetching: isSearchFetching } = useSearchPosts(debouncedSearch);
+  // const debouncedSearch = useDebounce(searchValue, 500);
+  // const { data: searchedPosts, isFetching: isSearchFetching } = 
+  // useSearchPosts(debouncedSearch);
 
   // useEffect(() => {
   //   if (inView && !searchValue) {
@@ -39,15 +59,15 @@ const Explore = () => {
   //   }
   // }, [inView, searchValue]);
 
-  if (!posts)
+  if (!homeFeed)
     return (
       <div className="flex-center w-full h-full">
         <Loader />
       </div>
     );
 
-  const shouldShowSearchResults = searchValue !== "";
-  const shouldShowPosts = !shouldShowSearchResults
+  // const shouldShowSearchResults = searchValue !== "";
+  // const shouldShowPosts = !shouldShowSearchResults
     // posts.pages.every((item) => item.documents.length === 0);
 
   return (
@@ -88,26 +108,47 @@ const Explore = () => {
         </div>
       </div>
 
-      <div className="flex flex-wrap gap-9 w-full max-w-5xl">
-        {shouldShowSearchResults ? (
-          <SearchResults
-            isSearchFetching={isSearchFetching}
-            searchedPosts={searchedPosts}
-          />
-        ) : shouldShowPosts ? (
-          <p className="text-light-4 mt-10 text-center w-full">End of posts</p>
-        ) : (
-          posts?.documents.map((item, index) => (
-            <GridPostList key={`page-${index}`} posts={item.documents} />
-          ))
-        )}
+      <div className="flex flex-wrap gap-9">
+
+      <ul className="grid-container ">
+      {shuffledArray.map((item) => (
+               <li className="relative min-w-80 h-80">
+                 <Link to={`/posts/${item.id}`} className="grid-post_link">
+                   <img
+                     src={item.imageUrl}
+                     alt="post"
+                     className="h-full w-full object-cover"
+                   />
+                 </Link>
+       
+                 <div className="grid-post_user">
+                   
+                     <div className="flex items-center justify-start gap-2 flex-1">
+                       <img
+                         src={
+                          item.creatorImg ||
+                           "/assets/icons/profile-placeholder.svg"
+                         }
+                         alt="creator"
+                         className="w-8 h-8 rounded-full"
+                       />
+                       <p className="line-clamp-1">{item.creator}</p>
+                     </div>
+                   {/* {<PostStats post={item} userId={item.id} />} */}
+                 </div>
+               </li>
+          ))}
+      </ul>
+       
+          
+
       </div>
 
-      {!searchValue && (
+      {/* {!searchValue && (
         <div  className="mt-10">
           <Loader />
         </div>
-      )}
+      )} */}
     </div>
   );
 };
