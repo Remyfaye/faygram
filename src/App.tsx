@@ -16,13 +16,13 @@ const App = () => {
         {/* public routes */}
         <Route element={<AuthLayout/>}>
           <Route path='/' element={<SignInForm/>}/>
-          <Route path='/sign-up' element={<SignUpForm/>}/>
+          <Route path='/#sign-up' element={<SignUpForm/>}/>
         </Route>
       
 
         {/* private route */}
         <Route element={<RootLayout/>}>
-          <Route path='/#home' element={<Home/>}/>
+          <Route index element={<Home/>}/>
           <Route path='/#explore' element={<Explore/>} />
           <Route path='/#saved' element={<Saved/>} />
           <Route path='/#all-users' element={<AllUsers/>} />
