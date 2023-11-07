@@ -1,12 +1,12 @@
 import Loader from "@/components/shared/Loader"
 import PostCard from "@/components/shared/PostCard"
 import { homeFeed } from "@/constants"
-import { useGetResentPost } from "@/lib/react-query/queriesAndMutations"
-import { Models } from "appwrite"
+// import { useGetResentPost } from "@/lib/react-query/queriesAndMutations"
+// import { Models } from "appwrite"
 
 
 const Home = () => {
-  const {data: posts, isPending: isPostLoading} = useGetResentPost()
+  // const {data: posts, isPending: isPostLoading} = useGetResentPost()
   return (
     <div className="flex flex-1">
 
@@ -16,7 +16,7 @@ const Home = () => {
 
           <h2 className="h3-bold capitalize w-full">home feed</h2>
 
-          {isPostLoading && !homeFeed ? (
+          { !homeFeed ? (
             <Loader/>
           ) : (
             <ul className="flex flex-col ">

@@ -2,14 +2,14 @@ import { Link, useNavigate } from "react-router-dom"
 import { Button } from "../ui/button"
 import { useSignOutAccount } from "@/lib/react-query/queriesAndMutations"
 import { useEffect } from "react"
-import { useUserContext } from "@/context/AuthContext"
+// import { useUserContext } from "@/context/AuthContext"
 
 
 
 const Topbar = () => {
     const {mutate: signOut, isSuccess} = useSignOutAccount()
     const navigate = useNavigate()
-    const {user} = useUserContext()
+    // const {user} = useUserContext()
 
     useEffect(() => {
         if(isSuccess) navigate(0)

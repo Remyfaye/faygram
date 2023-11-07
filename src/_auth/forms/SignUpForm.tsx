@@ -12,12 +12,12 @@ import Loader from "@/components/shared/Loader"
 import { Link, useNavigate } from "react-router-dom"
 import { useToast } from "@/components/ui/use-toast"
 import { useCreateUserAccountMutation, useSignInAccount } from "@/lib/react-query/queriesAndMutations"
-import { useUserContext } from "@/context/AuthContext"
+// import { useUserContext } from "@/context/AuthContext"
 
 
 const SignUpForm = () => {
   const {toast} = useToast()
-  const {checkAuthUser} = useUserContext()
+  // const {checkAuthUser} = useUserContext()
   const navigate = useNavigate()
 
   const {mutateAsync: createUserAccount, isPending:isCreatingAccount} = useCreateUserAccountMutation()
