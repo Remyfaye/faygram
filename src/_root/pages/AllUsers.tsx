@@ -27,8 +27,8 @@ const AllUsers = () => {
         <Link to={`/profile/${user?.id}`}>
         <div className="flex flex-col w-[10rem] gap-3 p-4 rounded-3xl bg-dark-4 
         items-center justify-center">
-        <img src={user.creatorImg} width={34} height={34} 
-        className="w-8 h-8 rounded-full object-cover"/>
+        <img src={user.creatorImg} width={40} height={40} 
+        className="w-10 h-10 rounded-full object-cover"/>
 
           <h2 className="capitalize">{user.name}</h2>
 

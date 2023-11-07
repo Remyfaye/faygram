@@ -30,6 +30,17 @@ export const sidebarLinks = [
 
   export const homeFeed = [
     {
+      id:'07',
+      imageUrl: "/assets/images/hf-7.jpg",
+      location:'the woods',
+      date:'6 days ago',
+      creator: "jane doe",
+      creatorImg:"/assets/images/pers-5.jpg",
+      caption: "Friends who become family. 🤗👩‍👩‍👧 #SquadGoals",
+      likes:"234",
+      imageId:'id05'
+    },
+    {
       creatorImg:"/assets/images/profile.png",
       id:'01',
       imageUrl: "/assets/images/hf-5.jpg",
@@ -88,6 +99,19 @@ export const sidebarLinks = [
       likes:"234",
       imageId:'id05'
     },
+    {
+      id:'06',
+      imageUrl: "/assets/images/hf-6.jpg",
+      location:'the woods',
+      date:'6 days ago',
+      creator: "jane doe",
+      creatorImg:"/assets/images/pers-5.jpg",
+      caption: "Savoring every bite of this culinary masterpiece. 🍽️🍷 #Foodie",
+      likes:"234",
+      imageId:'id05'
+    },
+    
+  
   ];
 
   export const allUsers = [
@@ -98,7 +122,7 @@ export const sidebarLinks = [
       name: "zedd freeman",
       location:'new york city',
       date:'2 days ago',
-      caption: "Time is the most valuable currency. Spend it wisely. ⌛💫 ",
+      caption: "Coffee lover and bookworm. ☕📚 ",
       likes: "10",
       imageId:'1d01',
       saved:"90"
@@ -112,7 +136,7 @@ export const sidebarLinks = [
       location:'star labs',
       saved:"12",
       likes:"2",
-      caption: "Explore",
+      caption: "Spreading positivity and good vibes. 🌞😊",
       imageId:'1d02'
     },
     {
@@ -122,7 +146,7 @@ export const sidebarLinks = [
       id:'03',
       date:'5 days ago',
       name: "john doe",
-      caption: "Vintage cars have a story to tell, and I'm here to listen. 📖🚙 #OldButGold",
+      caption: "Capturing life's beauty one snapshot at a time. 📸 #OldButGold",
       saved:"10",
       likes:"32",
       imageId:'1d03'
@@ -146,10 +170,45 @@ export const sidebarLinks = [
       date:'6 days ago',
       name: "jane doe",
       creatorImg:"/assets/images/pers-5.jpg",
-      caption: "Lost in the beauty of nature. 🏞️ #NatureLover",
+      caption: "A work in progress. 🚧",
       likes:"234",
       imageId:'id05'
     },
+    
+    {
+      id:'06',
+      imageUrl: "/assets/images/hf-1.jpg",
+      location:'the woods',
+      date:'6 days ago',
+      name: "patrick bell",
+      creatorImg:"/assets/images/pers-6.jpg",
+      caption: "Wandering and wondering. 🌄🤔",
+      likes:"234",
+      imageId:'id05'
+    },
+    {
+      id:'07',
+      imageUrl: "/assets/images/hf-1.jpg",
+      location:'the woods',
+      date:'6 days ago',
+      name: "barbie kants",
+      creatorImg:"/assets/images/pers-7.jpg",
+      caption: "In love with life's little treasures. 💎",
+      likes:"234",
+      imageId:'id05'
+    },
+    {
+      id:'08',
+      imageUrl: "/assets/images/hf-1.jpg",
+      location:'the woods',
+      date:'6 days ago',
+      name: "stefan woods",
+      creatorImg:"/assets/images/pers-8.jpg",
+      caption: "Learning, growing, and becoming. 📚🌱",
+      likes:"234",
+      imageId:'id05'
+    },
+    
   ];
   
   export const bottombarLinks = [

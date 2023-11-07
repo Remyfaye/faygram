@@ -53,6 +53,10 @@ const Profile = () => {
                     {user?.name}
             </p>
 
+            <p className="text-[15px] text-[#ab95d4]">
+              {user?.caption}
+            </p>
+
                 
             </div>
       </div>

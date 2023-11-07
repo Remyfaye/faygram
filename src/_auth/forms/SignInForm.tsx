@@ -116,8 +116,8 @@ const SignInForm = () => {
         <Button type="submit" className="shad-button_primary">
           
           <div className="flex-center gap-2">
-            <Loader/> Loading...
-          </div> : 'log in'
+            log in
+          </div> 
         </Button>
 
         <p className="text-small-regular text-light-2 text-center">
