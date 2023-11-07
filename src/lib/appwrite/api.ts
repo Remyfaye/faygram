@@ -413,7 +413,7 @@ export async function getSavedPosts(){
 
 export async function getAllUsers(){
   try{
-      const allUsers = databases.listDocuments(
+      const allUsers = await databases.listDocuments(
         appwriteConfig.databaseId,
         appwriteConfig.userCollectionId
       )
@@ -425,7 +425,7 @@ export async function getAllUsers(){
 
 export async function getAllPosts(){
   try{
-      const allPosts = databases.listDocuments(
+      const allPosts = await databases.listDocuments(
         appwriteConfig.databaseId,
         appwriteConfig.postCollectionId
       )

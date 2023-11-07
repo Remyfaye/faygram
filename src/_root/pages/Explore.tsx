@@ -1,5 +1,5 @@
-import { useEffect, useState } from "react";
-import { useInView } from "react-intersection-observer";
+import { useState } from "react";
+// import { useInView } from "react-intersection-observer";
 
 import useDebounce from "@/hooks/useDebounce";
 import Loader from "@/components/shared/Loader";
@@ -26,18 +26,18 @@ const SearchResults = ({ isSearchFetching, searchedPosts }: SearchResultProps) =
 };
 
 const Explore = () => {
-  const { ref, inView } = useInView();
-  const { data: posts , fetchNextPage, hasNextPage } = useGetPosts();
+  // const { ref, inView } = useInView();
+  const { data: posts  } = useGetPosts();
 
   const [searchValue, setSearchValue] = useState("");
   const debouncedSearch = useDebounce(searchValue, 500);
   const { data: searchedPosts, isFetching: isSearchFetching } = useSearchPosts(debouncedSearch);
 
-  useEffect(() => {
-    if (inView && !searchValue) {
-      fetchNextPage();
-    }
-  }, [inView, searchValue]);
+  // useEffect(() => {
+  //   if (inView && !searchValue) {
+  //     fetchNextPage();
+  //   }
+  // }, [inView, searchValue]);
 
   if (!posts)
     return (
@@ -47,8 +47,8 @@ const Explore = () => {
     );
 
   const shouldShowSearchResults = searchValue !== "";
-  const shouldShowPosts = !shouldShowSearchResults && 
-    posts.pages.every((item) => item.documents.length === 0);
+  const shouldShowPosts = !shouldShowSearchResults
+    // posts.pages.every((item) => item.documents.length === 0);
 
   return (
     <div className="explore-container">
@@ -97,14 +97,14 @@ const Explore = () => {
         ) : shouldShowPosts ? (
           <p className="text-light-4 mt-10 text-center w-full">End of posts</p>
         ) : (
-          posts.pages.map((item, index) => (
+          posts?.documents.map((item, index) => (
             <GridPostList key={`page-${index}`} posts={item.documents} />
           ))
         )}
       </div>
 
-      {hasNextPage && !searchValue && (
-        <div ref={ref} className="mt-10">
+      {!searchValue && (
+        <div  className="mt-10">
           <Loader />
         </div>
       )}
