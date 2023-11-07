@@ -345,7 +345,7 @@ export async function updatePost(post:IUpdatePost){
   }
 }
 
-export async function deletePost(postId:string, imageId:string){
+export async function deletePost(postId:string | undefined, imageId:string){
   if(!postId || !imageId) throw Error
   try{
     databases.deleteDocument(

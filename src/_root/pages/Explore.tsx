@@ -9,6 +9,7 @@ import { useGetPosts, useSearchPosts } from "@/lib/react-query/queriesAndMutatio
 
 export type SearchResultProps = {
   isSearchFetching: boolean;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   searchedPosts: any;
 };
 
@@ -26,7 +27,7 @@ const SearchResults = ({ isSearchFetching, searchedPosts }: SearchResultProps) =
 
 const Explore = () => {
   const { ref, inView } = useInView();
-  const { data: posts, fetchNextPage, hasNextPage } = useGetPosts();
+  const { data: posts , fetchNextPage, hasNextPage } = useGetPosts();
 
   const [searchValue, setSearchValue] = useState("");
   const debouncedSearch = useDebounce(searchValue, 500);

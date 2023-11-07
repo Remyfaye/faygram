@@ -1,6 +1,6 @@
 import { INewPost, INewUser, IUpdatePost } from "@/types"
-import { useInfiniteQuery, useMutation, useQuery, useQueryClient } from "@tanstack/react-query"
-import { createPost, createUserAccount, deletePost, deleteSavedPost, getAllPosts, getAllUsers, getCurrentUser, getInfinitePosts, getPostById, getRecentPosts, getSavedPosts, getUserPostById, likePost, savePost, searchPost, signInAccount, signOutAccount, updatePost } from "../appwrite/api"
+import {  useMutation, useQuery, useQueryClient } from "@tanstack/react-query"
+import { createPost, createUserAccount, deletePost, deleteSavedPost, getAllPosts, getAllUsers, getCurrentUser, getPostById, getRecentPosts, getSavedPosts, getUserPostById, likePost, savePost, searchPost, signInAccount, signOutAccount, updatePost } from "../appwrite/api"
 
 import { QUERY_KEYS } from "@/lib/react-query/queryKeys";
 
@@ -164,7 +164,7 @@ export const useUpdatePost= () => {
 export const useDeletePost = () => {
   const queryClient = useQueryClient();
   return useMutation({
-    mutationFn: ({ postId, imageId }: { postId?: string; imageId: string }) =>
+    mutationFn: ({ postId, imageId }: { postId?: string |'default value'; imageId: string }) =>
       deletePost(postId, imageId),
     onSuccess: () => {
       queryClient.invalidateQueries({
@@ -175,24 +175,24 @@ export const useDeletePost = () => {
 };
 
 
-export const useGetPosts01 = () => {
-  return useQuery({
-    queryKey: [QUERY_KEYS.GET_INFINITE_POSTS],
-    queryFn: getInfinitePosts,
+// export const useGetPosts01 = () => {
+//   return useQuery({
+//     queryKey: [QUERY_KEYS.GET_INFINITE_POSTS],
+//     queryFn: getInfinitePosts,
 
-    getNextPageParam: (lastPage) => {
+//     getNextPageParam: (lastPage) => {
 
-      if (lastPage && lastPage.documents.length === 0) {
-        return null;
-      }
+//       if (lastPage && lastPage.documents.length === 0) {
+//         return null;
+//       }
 
-      const lastId = lastPage?.documents[lastPage.documents.length - 1].$id;
+//       const lastId = lastPage?.documents[lastPage.documents.length - 1].$id;
 
-      return lastId;
-    },
+//       return lastId;
+//     },
     
-  });
-};
+//   });
+// };
 
 export const useGetAllUsers = () => {
   return useQuery({
