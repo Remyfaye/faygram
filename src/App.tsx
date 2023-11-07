@@ -15,14 +15,14 @@ const App = () => {
       <Routes>
         {/* public routes */}
         <Route element={<AuthLayout/>}>
-          <Route path='/sign-in' element={<SignInForm/>}/>
+          <Route path='/' element={<SignInForm/>}/>
           <Route path='/sign-up' element={<SignUpForm/>}/>
         </Route>
       
 
         {/* private route */}
         <Route element={<RootLayout/>}>
-          <Route path='/' element={<Home/>}/>
+          <Route index element={<Home/>}/>
           <Route path='/explore' element={<Explore/>} />
           <Route path='/saved' element={<Saved/>} />
           <Route path='/all-users' element={<AllUsers/>} />
