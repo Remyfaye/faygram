@@ -9,9 +9,10 @@ import { Button } from "@/components/ui/button"
 import { useForm } from "react-hook-form"
 import { SignInValidation } from "@/lib/validation"
 // import Loader from "@/components/shared/Loader"
-import { Link, useNavigate } from "react-router-dom"
+// import { Link, useNavigate } from "react-router-dom"
 import { useToast } from "@/components/ui/use-toast"
 import {  useSignInAccount } from "@/lib/react-query/queriesAndMutations"
+import { useNavigate } from "react-router-dom"
 // import { useUserContext } from "@/context/AuthContext"
 
 
@@ -120,12 +121,12 @@ const SignInForm = () => {
           </div> 
         </Button>
 
-        <p className="text-small-regular text-light-2 text-center">
+        {/* <p className="text-small-regular text-light-2 text-center">
             Don't have an account?
             <Link to='/sign-up' className="text-primary-500 text-small-semibold ml-1">
               sign up
             </Link>
-        </p>
+        </p> */}
 
         </form>
 
