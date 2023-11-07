@@ -43,7 +43,7 @@ const SignInForm = () => {
   
       if(!session) {
         toast({title:'welcome'})
-        return navigate('/')
+        return navigate('/home')
       }
   
       // const isLoggedIn = await checkAuthUser()
@@ -51,7 +51,7 @@ const SignInForm = () => {
   
       if(isLoggedIn){
         form.reset()
-        navigate('/')
+        navigate('/home')
         toast({title:'welcome back'})
       }else{return toast({title:'sign in failed. please try again'})}
     
