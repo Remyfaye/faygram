@@ -1,4 +1,4 @@
-import { useState } from "react";
+// import { useState } from "react";
 // import { useInView } from "react-intersection-observer";
 
 // import useDebounce from "@/hooks/useDebounce";
@@ -42,13 +42,16 @@ function shuffleArray<T>(array: T[]): T[] {
   return shuffledArray;
 }
 
+
 const Explore = () => {
   // const { ref, inView } = useInView();
   // const { data: posts  } = useGetPosts();
 
+  if(!homeFeed) return <Loader/>
+
   const shuffledArray = shuffleArray(homeFeed);
 
-  const [searchValue, setSearchValue] = useState("");
+  // const [searchValue, setSearchValue] = useState("");
   // const debouncedSearch = useDebounce(searchValue, 500);
   // const { data: searchedPosts, isFetching: isSearchFetching } = 
   // useSearchPosts(debouncedSearch);
@@ -85,11 +88,11 @@ const Explore = () => {
             type="text"
             placeholder="Search"
             className="explore-search"
-            value={searchValue}
-            onChange={(e) => {
-              const { value } = e.target;
-              setSearchValue(value);
-            }}
+            // value={searchValue}
+            // onChange={(e) => {
+            //   const { value } = e.target;
+            //   setSearchValue(value);
+            // }}
           />
         </div>
       </div>

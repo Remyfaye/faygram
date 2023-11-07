@@ -1,9 +1,11 @@
 
+// import {useState} from 'react'
 import { useUserContext } from "@/context/AuthContext"
 // import { formatDateString } from "@/lib/utils"
 // import { Models } from "appwrite"
 import { Link } from "react-router-dom"
 import PostStats from "./PostStats"
+import Loader from './Loader'
 
 
 type postCardProps = {
@@ -13,9 +15,13 @@ type postCardProps = {
 const PostCard = ({post}: postCardProps) => {
     const {user} = useUserContext()
     console.log(post)
+    // const [noPostYet, setNoPostYet] = useState('')
     // const navigate = useNavigate()
 
-    // if(!post.creator) return
+    if(!post) {
+        return <Loader/>
+    }
+
   return (
     <div className="post-card">
 
@@ -68,11 +74,17 @@ const PostCard = ({post}: postCardProps) => {
                 </ul>
             </div>
 
-            <img 
+            
+               
+                <img 
             className="post-card_img"
             
             alt="pimg"
             src={post?.imageUrl || '/assets/icons/profile-placeholder.svg'} />
+
+            
+
+            
         </Link>
 
         <PostStats post={post} />
